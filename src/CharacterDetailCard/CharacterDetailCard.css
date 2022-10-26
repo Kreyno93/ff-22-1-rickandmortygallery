@@ -1,0 +1,23 @@
+.CharacterDetailCard{
+    margin : 1vh;
+    border: aliceblue 1px solid;
+    padding: 1vh;
+    border-radius: 1vh;
+    background-color: #282c34;
+    font-style: italic;
+    width: 40vh;
+}
+
+h3{
+    color: white;
+}
+p{
+    color: aliceblue;
+}
+#back-link{
+    text-decoration: none;
+    color: white;
+}
+#back-link:hover{
+    color: green;
+}

@@ -1,0 +1,7 @@
+.CharacterGallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+input{
+    margin: 1rem;
+}

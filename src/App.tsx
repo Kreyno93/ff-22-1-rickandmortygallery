@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import CharacterGallery from "./CharacterGallery/CharacterGallery";
+import logo from "./rickandmortylogo.png"
+import axios from "axios";
+import {HashRouter, Route, Routes} from "react-router-dom";
+import CharacterDetailCard from "./CharacterDetailCard/CharacterDetailCard";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    const [characterList, setCharacterList] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://rickandmortyapi.com/api/character")
+            .then((response) => {
+                return response.data
+            })
+            .then((data) => {
+                setCharacterList(data.results)
+            })
+            .catch((error) => {
+                console.error("No Characters found! : " + error)
+            })
+    }, [])
+
+    return (
+        <div className="App">
+            <header className={"App-header"}>Rick and Morty Character Gallery
+                <img
+                    src={logo}
+                    className="App-logo" alt="logo"/>
+                <HashRouter>
+                    <Routes>
+                        <Route path={"/"} element={<CharacterGallery character={characterList}/>}/>
+                        <Route path={"/character/:id"} element={<CharacterDetailCard characterList={characterList}/>}/>
+                    </Routes>
+                </HashRouter>
+            </header>
+        </div>
+    );
 }
 
 export default App;
